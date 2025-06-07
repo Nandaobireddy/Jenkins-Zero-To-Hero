@@ -4,8 +4,8 @@ pipeline {
   stages {
     stage('Start Services') {
       steps {
-        dir('multi-stage-multi-agent') { // adjust if needed
-          sh 'docker compose up -d'
+        dir('multi-stage-multi-agent') {
+          sh 'docker-compose up -d'
         }
       }
     }
