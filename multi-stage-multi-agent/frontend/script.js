@@ -6,3 +6,4 @@ function fetchBackend() {
       })
       .catch(err => console.error("Error calling backend:", err));
   }
+  

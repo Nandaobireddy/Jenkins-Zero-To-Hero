@@ -2,25 +2,9 @@ pipeline {
   agent any
 
   stages {
-    stage('Build Backend') {
+    stage('Start Services') {
       steps {
-        dir('backend') {
-          sh 'docker build -t my-backend .' 
-        }
-      }
-    }
-
-    stage('Build Frontend') {
-      steps {
-        dir('frontend') {
-          sh 'docker build -t my-frontend .' 
-        }
-      }
-    }
-
-    stage('Compose Up') {
-      steps {
-        sh 'docker-compose up -d --build'
+        sh 'docker-compose up -d'
       }
     }
   }
