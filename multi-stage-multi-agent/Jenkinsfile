@@ -1,44 +1,26 @@
 pipeline {
-  agent none
+  agent any
 
   stages {
     stage('Build Backend') {
-      agent {
-        docker {
-          image 'docker:24.0.5-dind'
-          args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-      }
       steps {
         dir('backend') {
-          sh 'docker build -t my-backend .'
+          sh 'docker build -t my-backend .' 
         }
       }
     }
 
     stage('Build Frontend') {
-      agent {
-        docker {
-          image 'docker:24.0.5-dind'
-          args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-      }
       steps {
         dir('frontend') {
-          sh 'docker build -t my-frontend .'
+          sh 'docker build -t my-frontend .' 
         }
       }
     }
 
     stage('Compose Up') {
-      agent {
-        docker {
-          image 'docker/compose:1.29.2'
-          args '-v /var/run/docker.sock:/var/run/docker.sock -v $PWD:/workspace'
-        }
-      }
       steps {
-        sh 'docker-compose -f /workspace/docker-compose.yml up -d --build'
+        sh 'docker-compose up -d --build'
       }
     }
   }
