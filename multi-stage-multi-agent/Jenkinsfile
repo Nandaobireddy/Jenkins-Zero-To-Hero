@@ -1,15 +1,12 @@
 pipeline {
-  agent {
-    docker {
-      image 'docker/compose:1.29.2'
-      args '-v /var/run/docker.sock:/var/run/docker.sock -v $PWD:/app -w /app'
-    }
-  }
+  agent any
 
   stages {
     stage('Start Services') {
       steps {
-        sh 'docker-compose up -d'
+        dir('multi-stage-multi-agent') { // adjust if needed
+          sh 'docker compose up -d'
+        }
       }
     }
   }
